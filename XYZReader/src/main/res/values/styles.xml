@@ -21,6 +21,8 @@
 
     </style>
 
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
+    
     <style name="Theme.Bacon.Detail">
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
