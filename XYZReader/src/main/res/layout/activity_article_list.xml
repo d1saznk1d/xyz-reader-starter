@@ -1,8 +1,27 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:theme="@style/AppTheme"
+        android:fitsSystemWindows="true"
+        />
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        app:toolbarId="@+id/toolbar"
+        android:id="@+id/collapsingbar"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:titleEnabled="true"
+        app:layout_scrollFlags = "scroll|exitUntilCollapsed"
+        />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
@@ -19,6 +38,8 @@
             android:paddingLeft="@dimen/list_side_margin"
             android:paddingRight="@dimen/list_side_margin"
             android:paddingBottom="28dp" />
+
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <FrameLayout
@@ -27,6 +48,7 @@
         android:layout_height="112dp"
         android:background="?colorPrimary"
         android:elevation="8dp">
+
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -43,7 +65,21 @@
                 android:src="@drawable/logo"
                 android:contentDescription="@string/app_name" />
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_plus"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/plus"
+                app:fabSize="normal"
+                app:layout_anchor="@+id/appbar"
+                app:elevation="6dp"
+                app:borderWidth="0dp"
+                app:layout_anchorGravity="bottom|right|end"
+                />
+
         </android.support.v7.widget.Toolbar>
     </FrameLayout>
 
-</FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>
