@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:theme="@style/AppTheme"
-        />
+        android:fitsSystemWindows="true"
+        >
 
     <android.support.design.widget.CollapsingToolbarLayout
         app:toolbarId="@+id/toolbar"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         app:titleEnabled="true"
         app:layout_scrollFlags = "scroll|exitUntilCollapsed"
-        />
+        >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -29,56 +29,59 @@
         android:layout_marginLeft="@dimen/list_toolbar_side_margin"
         android:layout_marginRight="@dimen/list_toolbar_side_margin"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        >
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_gravity="bottom"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo"
-            android:contentDescription="@string/app_name" />
+    </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_plus"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:src="@drawable/plus"
-            app:fabSize="normal"
-            app:layout_anchor="@+id/appbar"
-            app:elevation="6dp"
-            app:borderWidth="0dp"
-            app:layout_anchorGravity="bottom|right|end"
-            />
 
-    </android.support.v7.widget.Toolbar>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay"
+            android:paddingTop="116dp"
+            android:paddingLeft="@dimen/list_side_margin"
+            android:paddingRight="@dimen/list_side_margin"
+            android:paddingBottom="28dp" />
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
     <FrameLayout
         android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?colorPrimary"
+        android:layout_height="112dp"
+        android:background="@color/theme_primary"
         android:elevation="8dp">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingBottom="28dp"
-                android:paddingLeft="@dimen/list_side_margin"
-                android:paddingRight="@dimen/list_side_margin"
-                android:paddingTop="116dp"
-                android:scrollbarStyle="outsideOverlay" />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:src="@drawable/plus"
+                app:borderWidth="0dp"
+                app:elevation="6dp"
+                app:fabSize="normal"
+                app:layout_anchor="@+id/appbar"
+                app:layout_anchorGravity="bottom|right|end" />
 
-
-        </android.support.v4.widget.SwipeRefreshLayout>
     </FrameLayout>
 
 
