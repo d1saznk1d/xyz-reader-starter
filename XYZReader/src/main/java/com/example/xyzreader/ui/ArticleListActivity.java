@@ -9,9 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,14 +19,10 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
-import android.transition.Explode;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.xyzreader.R;
@@ -82,6 +76,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         getLoaderManager().initLoader(0, null, this);
 
+        postponeEnterTransition();
 
         FloatingActionButton fab = findViewById(R.id.fab_plus);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -174,12 +169,9 @@ public class ArticleListActivity extends AppCompatActivity implements
                     String transitionName = vh.thumbnailView.getTransitionName();
                     Bundle bundle = ActivityOptions
                             .makeSceneTransitionAnimation(
-                                    ArticleListActivity.this,
-                                    vh.thumbnailView,
-                                    vh.thumbnailView.getTransitionName()).
-                                    toBundle();
+                                    ArticleListActivity.this, vh.thumbnailView, vh.thumbnailView.getTransitionName()).toBundle();
                     vh.thumbnailView.setTransitionName(transitionName);
-                    Log.i("Transition_name:", transitionName);
+                    Log.i("Transition_name: " + vh.getAdapterPosition(), transitionName);
                     startActivity(new Intent(Intent.ACTION_VIEW,
                             ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
                 }
@@ -197,6 +189,25 @@ public class ArticleListActivity extends AppCompatActivity implements
                 return new Date();
             }
         }
+
+        @Override
+        public void onActivityReenter(int resultCode, Intent data) {
+            super.onActivityReenter(resultCode, data);
+            setResult(Activity.RESULT_OK);
+
+            // Postpone the shared element return transition.
+            postponeEnterTransition();
+            mRecyclerView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    mRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                    mRecyclerView.requestLayout();
+                    startPostponedEnterTransition();
+                    return true;
+                }
+            });
+        }
+
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
