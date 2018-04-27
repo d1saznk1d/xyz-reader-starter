@@ -26,7 +26,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:transitionName="profile"
+                    android:transitionName="@string/transition_name"
                      />
 
                 <View
