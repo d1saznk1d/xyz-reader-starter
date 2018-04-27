@@ -3,5 +3,10 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
         <item>@font/headland_one</item>
+        <item>@font/lobster_two_bold</item>
+        <item>@font/pacifico</item>
+        <item>@font/sofia</item>
+        <item>@font/source_sans_pro_extralight</item>
+        <item>@font/titillium_web_extralight</item>
     </array>
 </resources>
