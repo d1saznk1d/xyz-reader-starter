@@ -25,6 +25,7 @@ import android.transition.Transition;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -93,6 +94,14 @@ public class ArticleListActivity extends AppCompatActivity implements
         if (savedInstanceState == null) {
             refresh();
         }
+
+        Bundle bundle = ActivityOptions
+                .makeSceneTransitionAnimation(
+                        this,
+                        sharedView,
+                        sharedView.getTransitionName())
+                .toBundle();
+        startActivity(intent, bundle);
     }
 
     private void refresh() {
