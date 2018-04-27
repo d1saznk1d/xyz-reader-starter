@@ -94,14 +94,6 @@ public class ArticleListActivity extends AppCompatActivity implements
         if (savedInstanceState == null) {
             refresh();
         }
-
-        Bundle bundle = ActivityOptions
-                .makeSceneTransitionAnimation(
-                        this,
-                        sharedView,
-                        sharedView.getTransitionName())
-                .toBundle();
-        startActivity(intent, bundle);
     }
 
     private void refresh() {
@@ -178,8 +170,16 @@ public class ArticleListActivity extends AppCompatActivity implements
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    String transitionName = vh.thumbnailView.getTransitionName();
+                    Bundle bundle = ActivityOptions
+                            .makeSceneTransitionAnimation(
+                                    this,
+                                    vh.thumbnailView,
+                                    transitionName).
+                                    toBundle();
+                    vh.thumbnailView.setTransitionName(transitionName);
                     startActivity(new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
                 }
             });
             return vh;
