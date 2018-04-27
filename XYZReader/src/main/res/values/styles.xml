@@ -18,25 +18,13 @@
 <resources>
 
     <style name="Theme.Bacon" parent="@style/Theme.AppCompat.Light.NoActionBar">
-
-    </style>
-
-
-    <style name="Theme.Bacon.Detail">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light"/>
-
-    <style name = "NoActionBar" parent = "@android:style/Theme.Holo.Light">
-        <item name = "android:windowActionBar">false</item>
-        <item name = "android:windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme"  parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary_material_dark</item>
         <item name="colorPrimaryDark">@color/primary_dark_material_dark</item>
-        <!-- enable window content transition -->
+        <item name="android:colorAccent">@color/ltgray</item>
+    </style>
+
+
+    <style name="Theme.Bacon.Detail" parent="Theme.Bacon">
         <item name="android:windowContentTransitions">true</item>
 
         <!-- specify enter and exit transition -->
@@ -46,7 +34,7 @@
 
         <!-- options are: explode, slide, fade -->
         <item name="android:windowSharedElementEnterTransition">
-        @transition/change_image_transform</item>
+            @transition/change_image_transform</item>
         <item name="android:windowSharedElementExitTransition">
             @transition/change_image_transform</item>
     </style>
