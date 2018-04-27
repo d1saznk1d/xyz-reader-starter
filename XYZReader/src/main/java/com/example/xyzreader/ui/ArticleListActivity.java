@@ -1,5 +1,6 @@
 package com.example.xyzreader.ui;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
@@ -173,11 +174,12 @@ public class ArticleListActivity extends AppCompatActivity implements
                     String transitionName = vh.thumbnailView.getTransitionName();
                     Bundle bundle = ActivityOptions
                             .makeSceneTransitionAnimation(
-                                    this,
+                                    ArticleListActivity.this,
                                     vh.thumbnailView,
-                                    transitionName).
+                                    vh.thumbnailView.getTransitionName()).
                                     toBundle();
                     vh.thumbnailView.setTransitionName(transitionName);
+                    Log.i("Transition_name:", transitionName);
                     startActivity(new Intent(Intent.ACTION_VIEW,
                             ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
                 }
